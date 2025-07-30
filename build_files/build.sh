@@ -16,9 +16,10 @@ RELEASE="$(rpm -E %fedora)"
 # as per https://openzfs.github.io/openzfs-docs/Getting%20Started/Fedora/index.html
 # "zfs-fuse is unmaintained and should not be used under any circumstance"
 rpm -e --nodeps zfs-fuse
+dnf install -y https://zfsonlinux.org/fedora/zfs-release-2-8$(rpm --eval "%{dist}").noarch.rpm
+dnf install -y kernel-devel-$(uname -r | awk -F'-' '{print $1}')
+dnf install -y zfs
 
-### Install cached ZFS and appropriate kernel
-rpm-ostree override replace /tmp/rpms/kernel/*.rpm /tmp/rpms/zfs/*.rpm
 # Auto-load ZFS module
 depmod -a "$(rpm -qa kernel --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')" && \
 echo "zfs" > /etc/modules-load.d/zfs.conf && \
