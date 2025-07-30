@@ -17,7 +17,7 @@ RELEASE="$(rpm -E %fedora)"
 # "zfs-fuse is unmaintained and should not be used under any circumstance"
 rpm -e --nodeps zfs-fuse
 dnf install -y https://zfsonlinux.org/fedora/zfs-release-2-8$(rpm --eval "%{dist}").noarch.rpm
-dnf install -y kernel-devel-$(uname -r | awk -F'-' '{print $1}')
+dnf install -y kernel-devel-"$(rpm -qa kernel --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')"
 dnf install -y zfs
 
 # Auto-load ZFS module
