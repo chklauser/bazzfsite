@@ -4,5 +4,5 @@
 
 repositoryID: my-custom-id-here # Fill in with your own credentials 
 owners: # (optional, used to claim repository ownership)
-  - name: My Name
-    email: my_email@email.com
+  - name: chklauser
+    email: christian@klauser.link
